@@ -1,0 +1,33 @@
+.tablist-component {
+  .close-icon {
+    visibility: hidden;
+    margin-left: 4px;
+  }
+  .nav-link:hover .close-icon {
+    visibility: visible;
+    margin-left: 4px;
+  }
+  .nav-link.active .close-icon {
+    visibility: visible;
+    margin-left: 4px;
+  }
+  .unsaved-icon {
+    display: inline-block;
+    background: #d9534f;
+    width: 11px;
+    height: 11px;
+    margin-left: 4px;
+  }
+  .withUnsaved.nav-link .close-icon {
+    display: none;
+    margin-left: 4px;
+  }
+  .withUnsaved.nav-link:hover .close-icon {
+    display: inline-block;
+    margin-left: 4px;
+  }
+  .withUnsaved.nav-link:hover .unsaved-icon {
+    display: none;
+    margin-left: 4px;
+  }
+}

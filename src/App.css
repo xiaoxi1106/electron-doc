@@ -1,0 +1,37 @@
+.icon-button {
+  background: none;
+  border: none;
+  color: inherit;
+}
+.c-link {
+  cursor: pointer;
+}
+.w-btn{
+  width: 100%;
+}
+.icon-r{
+  margin-right: 4px;
+}
+.nos{
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.start-page {
+  font-size: 30px;
+  height: 300px;
+  line-height: 300px;
+  color: #ccc;
+  text-align: center;
+}
+.left-panel {
+  min-height: 100vh;
+  position: relative;
+}
+.button-group {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+.no-border {
+  border-radius: 0 !important;
+}

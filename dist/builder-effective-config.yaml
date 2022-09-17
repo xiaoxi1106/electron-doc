@@ -1,0 +1,46 @@
+directories:
+  output: dist
+  buildResources: assets
+appId: my-app
+productName: 我的文档
+copyright: 'Copyright © 2022 ${author}'
+files:
+  - filter:
+      - build/**/*
+      - node_modules/**/*
+      - settings/**/*
+      - package.json
+      - main.js
+      - ./src/menuTemplate.js
+      - ./src/AppWindow.js
+extends: null
+mac:
+  category: public.app-category.productivity
+  artifactName: '${productName}-${version}-${arch}.${ext}'
+dmg:
+  background: assets/appdmg.png
+  icon: assets/icon.icns
+  iconSize: 100
+  contents:
+    - x: 380
+      'y': 280
+      type: link
+      path: /Applications
+    - x: 110
+      'y': 280
+      type: file
+  window:
+    width: 500
+    height: 500
+win:
+  target:
+    - msi
+    - nsis
+  icon: assets/icon.ico
+  artifactName: '${productName}-Web-Setup-${version}.${ext}'
+  publisherName: Xiao1106
+nsis:
+  allowToChangeInstallationDirectory: true
+  oneClick: false
+  perMachine: false
+electronVersion: 5.0.13
