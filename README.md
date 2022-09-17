@@ -28,3 +28,5 @@ electron reactHooks node bootstrap
 
 可对文档进行修改、删除
 ![输入图片说明](assets/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202022-09-17%20090235.png)
+
+windows安装包：https://gitee.com/xiao1106-web/electron-doc/blob/master/assets/%E6%88%91%E7%9A%84%E6%96%87%E6%A1%A340-0.1.0.msi
