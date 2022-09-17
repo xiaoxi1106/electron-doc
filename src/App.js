@@ -53,7 +53,8 @@ function App() {
   const activeFiles = files[activeFileId];
   const fileBack = objToArr(files);
   const fileArr = searchedFiles.length > 0 ? searchedFiles : fileBack;
-  const saveLocation = settingStore.get("savedFileLocation") || remote.app.getPath("documents");
+  const saveLocation =
+    settingStore.get("savedFileLocation") || remote.app.getPath("documents");
 
   const fileClick = (fileId) => {
     setActiveFileId(fileId);
@@ -93,17 +94,17 @@ function App() {
     if (opendFileIds.length > 1) {
       setActiveFileId(opendFileIds[0]);
     } else {
-      setActiveFileId('');
+      setActiveFileId("");
     }
   };
 
   const fileChange = (id, value) => {
-    if(value!==files[id].body){
+    if (value !== files[id].body) {
       const newFiles = { ...files[id], body: value };
-    setFiles({ ...files, [id]: newFiles });
-    if (!unSaveFileIds.includes(id)) {
-      setUnSaveFileIds([...unSaveFileIds, id]);
-    }
+      setFiles({ ...files, [id]: newFiles });
+      if (!unSaveFileIds.includes(id)) {
+        setUnSaveFileIds([...unSaveFileIds, id]);
+      }
     }
   };
 
@@ -120,7 +121,7 @@ function App() {
         saveToStore(newFiles);
       });
     } else {
-      const oldPath = files[id].path
+      const oldPath = files[id].path;
 
       fileHelper.renameFile(oldPath, filePath).then(() => {
         setFiles(newFiles);
@@ -191,13 +192,13 @@ function App() {
   };
 
   useIpcRenderer({
-    'create-new-file': createFile,
-    'import-file': importFiles,
-    'save-edit-file': currentFile,
+    "create-new-file": createFile,
+    "import-file": importFiles,
+    "save-edit-file": currentFile,
     // 'file-downloaded': activeFileDownloaded,
     // 'files-uploaded': filesUploaded,
     // 'loading-status': (message, status) => { setLoading(status) }
-  })
+  });
 
   return (
     <div className="App container-fluid px-0">

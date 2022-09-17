@@ -1,4 +1,4 @@
-const { BrowserWindow } = require('electron')
+const { BrowserWindow } = require("electron");
 
 class AppWindow extends BrowserWindow {
   constructor(config, urlLocation) {
@@ -9,15 +9,15 @@ class AppWindow extends BrowserWindow {
         nodeIntegration: true,
       },
       show: false,
-      backgroundColor: '#efefef',
-    }
-    const finalConfig = { ...basicConfig, ...config }
-    super(finalConfig)
-    this.loadURL(urlLocation)
-    this.once('ready-to-show', () => {
-      this.show()
-    })
+      backgroundColor: "#efefef",
+    };
+    const finalConfig = { ...basicConfig, ...config };
+    super(finalConfig);
+    this.loadURL(urlLocation);
+    this.once("ready-to-show", () => {
+      this.show();
+    });
   }
 }
 
-module.exports = AppWindow
+module.exports = AppWindow;

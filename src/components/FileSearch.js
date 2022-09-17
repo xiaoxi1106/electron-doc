@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import useKeyPress from "../hooks/useKeyPress";
-import useIpcRenderer from '../hooks/useIpcRenderer'
+import useIpcRenderer from "../hooks/useIpcRenderer";
 
 const FileSearch = ({ title, onFileSearch }) => {
   const [inputActive, setInputActive] = useState(false);
@@ -16,7 +16,7 @@ const FileSearch = ({ title, onFileSearch }) => {
     e.preventDefault();
     setInputActive(false);
     setValue("");
-    onFileSearch('')
+    onFileSearch("");
   };
 
   useEffect(() => {
@@ -34,10 +34,10 @@ const FileSearch = ({ title, onFileSearch }) => {
     }
   }, [inputActive]);
   useIpcRenderer({
-    'search-file': () => {
+    "search-file": () => {
       setInputActive(true);
     },
-  })
+  });
 
   return (
     <div className="alert alert-primary mb-0">

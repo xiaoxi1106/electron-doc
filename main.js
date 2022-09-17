@@ -1,5 +1,6 @@
 const { app, BrowserWindow, Menu, ipcMain } = require("electron");
 const isDev = require("electron-is-dev");
+const { autoUpdater } = require("electron-updater");
 const path = require("path");
 const template = require("./src/menuTemplate");
 const AppWindow = require("./src/AppWindow");
@@ -16,6 +17,27 @@ app.on("ready", () => {
   //     // webSecurity: false
   //   },
   // });
+  autoUpdater.autoDownload = false;
+  autoUpdater.checkForUpdatesAndNotify();
+  autoUpdater.on("error", (error) => {
+    dialog.showErrorBox("Error", error === null ? "unknown" : error.stack);
+  });
+  autoUpdater.on(
+    "update-available",
+    () => {
+      dialog.showMessageBox({
+        type: "info",
+        title: "应用有新版本",
+        message: "发现新版本，是否现在更新？",
+        buttons: ["是", "否"],
+      });
+    },
+    (buttonIndex) => {
+      if (buttonIndex == 0) {
+        autoUpdater.downloadUpdate();
+      }
+    }
+  );
 
   const mainWindowConfig = {
     width: 1024,
@@ -25,7 +47,9 @@ app.on("ready", () => {
   // ipcRenderer.on('message', (event, data) => {
   // console.log('message', data.msg)
   // })
-  const urlLocation = isDev ? "http://localhost:3000" : `file://${path.join(__dirname,'.build/index.html')}`;
+  const urlLocation = isDev
+    ? "http://localhost:3000"
+    : `file://${path.join(__dirname, ".build/index.html")}`;
 
   mainWindow = new AppWindow(mainWindowConfig, urlLocation);
 

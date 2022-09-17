@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "electron-is-dev": "^2.0.0",
     "electron-store": "^4.0.0",
-    "electron-is-dev": "^2.0.0"
+    "electron-updater": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -21,6 +22,8 @@
     "pack": "electron-builder --dir",
     "prepack": "npm run build",
     "dist": "electron-builder",
+    "release": "cross-env GH_TOKEN=bd8f7433350c2834ec5dc00bdb8ca7bb electron-builder",
+    "prerelease": "npm run build",
     "predist": "npm run build"
   },
   "homepage": "./",

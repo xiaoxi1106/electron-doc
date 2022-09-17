@@ -5,11 +5,11 @@ import { faMarkdown } from "@fortawesome/free-brands-svg-icons";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { faSearch, faTimes } from "@fortawesome/free-solid-svg-icons";
 import useKeyPress from "../hooks/useKeyPress";
-import useContextMenu from '../hooks/useContextMenu'
-import { getParentNode } from '../utils/helper'
+import useContextMenu from "../hooks/useContextMenu";
+import { getParentNode } from "../utils/helper";
 
 const { remote } = window.require("electron");
-const {Menu, MenuItem}=remote
+const { Menu, MenuItem } = remote;
 
 const FileList = ({ files, onFileClick, onSaveEdit, onFileDelete }) => {
   const [editStatus, setEditStatus] = useState(false);
@@ -18,49 +18,53 @@ const FileList = ({ files, onFileClick, onSaveEdit, onFileDelete }) => {
   const entPress = useKeyPress(13);
   const escPress = useKeyPress(27);
 
-  const clickedItem = useContextMenu([
-    {
-      label: '打开',
-      click: () => {
-        const parentElement = getParentNode(clickedItem.current, 'file-item')
-        if(parentElement){
-          onFileClick(parentElement.dataset.id)
-        }
-      }
-    },
-    {
-      label: '重命名',
-      click: () => {
-        const parentElement = getParentNode(clickedItem.current, 'file-item')
-        if (parentElement) {
-          const { id, title } = parentElement.dataset
-          setEditStatus(id)
-          setValue(title)
-        }
-      }
-    },
-    {
-      label: '删除',
-      click: () => {
-        const parentElement = getParentNode(clickedItem.current, 'file-item')
-        if (parentElement) {
-          onFileDelete(parentElement.dataset.id)
-        }
-      }
-    },
-  ], '.file-list', [files])
+  const clickedItem = useContextMenu(
+    [
+      {
+        label: "打开",
+        click: () => {
+          const parentElement = getParentNode(clickedItem.current, "file-item");
+          if (parentElement) {
+            onFileClick(parentElement.dataset.id);
+          }
+        },
+      },
+      {
+        label: "重命名",
+        click: () => {
+          const parentElement = getParentNode(clickedItem.current, "file-item");
+          if (parentElement) {
+            const { id, title } = parentElement.dataset;
+            setEditStatus(id);
+            setValue(title);
+          }
+        },
+      },
+      {
+        label: "删除",
+        click: () => {
+          const parentElement = getParentNode(clickedItem.current, "file-item");
+          if (parentElement) {
+            onFileDelete(parentElement.dataset.id);
+          }
+        },
+      },
+    ],
+    ".file-list",
+    [files]
+  );
 
   const closeSearch = (item) => {
     setEditStatus(false);
     setValue("");
-    if(item.isNew){
-        onFileDelete(item.id)
+    if (item.isNew) {
+      onFileDelete(item.id);
     }
   };
 
   useEffect(() => {
     const item = files.find((file) => file.id === editStatus);
-    if (entPress && editStatus && value.trim()!=='') {
+    if (entPress && editStatus && value.trim() !== "") {
       onSaveEdit(item.id, value, item.isNew);
       setEditStatus(false);
       setValue("");
@@ -70,13 +74,13 @@ const FileList = ({ files, onFileClick, onSaveEdit, onFileDelete }) => {
     }
   });
 
-  useEffect(()=>{
-    const newFile=files.find(file=>file.isNew)
-    if(newFile){
-        setValue(newFile.title)
-        setEditStatus(newFile.id)
+  useEffect(() => {
+    const newFile = files.find((file) => file.isNew);
+    if (newFile) {
+      setValue(newFile.title);
+      setEditStatus(newFile.id);
     }
-  }, [files])
+  }, [files]);
 
   useEffect(() => {
     if (editStatus) {
@@ -93,7 +97,7 @@ const FileList = ({ files, onFileClick, onSaveEdit, onFileDelete }) => {
           data-id={file.id}
           data-title={file.title}
         >
-          {(file.id !== editStatus && !file.isNew) ? (
+          {file.id !== editStatus && !file.isNew ? (
             <>
               <span className="col-2">
                 <FontAwesomeIcon size="lg" icon={faMarkdown} />
@@ -133,13 +137,13 @@ const FileList = ({ files, onFileClick, onSaveEdit, onFileDelete }) => {
                   className="form-control"
                   value={value}
                   ref={node}
-                  placeholder='请输入文件名称'
+                  placeholder="请输入文件名称"
                   onChange={(e) => setValue(e.target.value)}
                 />
                 <button
                   type="button"
                   className="icon-button"
-                  onClick={()=>closeSearch(file)}
+                  onClick={() => closeSearch(file)}
                 >
                   <FontAwesomeIcon title="关闭" size="lg" icon={faTimes} />
                 </button>

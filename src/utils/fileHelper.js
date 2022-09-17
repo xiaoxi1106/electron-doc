@@ -11,9 +11,9 @@ const fileHelper = {
   renameFile: (path, newPath) => {
     return fs.rename(path, newPath);
   },
-  deleteFile: (path)=>{
-    return fs.unlink(path)
-  }
+  deleteFile: (path) => {
+    return fs.unlink(path);
+  },
 };
 
-export default fileHelper
+export default fileHelper;
